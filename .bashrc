@@ -14,6 +14,7 @@ alias rbt='reboot now'
 alias ..='cd ..'
 alias l='ls'
 alias lsa='ls -la'
+alias vi='vim'
 
 # Git
 alias gst='git status'
@@ -25,5 +26,25 @@ alias gps='git push'
 alias gpl='git pull'
 
 # Kubectl
-source <(kubectl completion bash | sed 's/kubectl/k/g')
+alias knodes='kubectl get nodes'
+alias kpods='kubectl get pods'
+alias kconf='kubectl config view'
+alias kversion='kubectl version'
+alias kservs='kubectl get services'
+alias kreplset='kubectl get replicaset'
+alias klogs='kubectl logs' # <POD NAME>
+alias kdescrpod='kubectl describe pod' # <POD NAME>
+alias kdepls='kubectl get deployments'
+alias knewdepl='kubectl create deployment' # <NAME> --image=image [--dry-run] [options]
+alias kdeldepl='kubectl delete deployment' # <NAME>
+
+function kapply() { # <FILE NAME>
+    local deployment_file="$1"
+    kubectl apply -f "$deployment_file"
+}
+
+function kexec() { # <POD NAME>
+    local pod="$1"
+    kubectl exec -it "$pod" -- bin/bash
+}
 
