@@ -24,9 +24,11 @@ alias gcm='git commit'
 alias gco='git checkout'
 alias gps='git push'
 alias gpl='git pull'
+alias gdf='git diff'
 
 # Kubectl
 alias knodes='kubectl get nodes'
+# "-o wide" if you wish to know pods IP addrs
 alias kpods='kubectl get pods'
 alias kconf='kubectl config view'
 alias kversion='kubectl version'
@@ -38,6 +40,12 @@ alias kdepls='kubectl get deployments'
 alias knewdepl='kubectl create deployment' # <NAME> --image=image [--dry-run] [options]
 alias kdeldepl='kubectl delete deployment' # <NAME>
 
+# Get status deployment from etcd
+function kstatus() { # <DEPLOYMENT_NAME>
+    local deployment="$1"
+    kubectl get deployment "$deployment" -o yaml
+}
+
 function kapply() { # <FILE NAME>
     local deployment_file="$1"
     kubectl apply -f "$deployment_file"
@@ -47,4 +55,8 @@ function kexec() { # <POD NAME>
     local pod="$1"
     kubectl exec -it "$pod" -- bin/bash
 }
+
+
+
+
 
