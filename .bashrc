@@ -37,13 +37,14 @@ alias kreplset='kubectl get replicaset'
 alias klogs='kubectl logs' # <POD NAME>
 alias kdescrpod='kubectl describe pod' # <POD NAME>
 alias kdepls='kubectl get deployments'
+alias kdepl='kubectl get deployments'
 alias knewdepl='kubectl create deployment' # <NAME> --image=image [--dry-run] [options]
 alias kdeldepl='kubectl delete deployment' # <NAME>
 
 # Get status deployment from etcd
 function kstatus() { # <DEPLOYMENT_NAME>
     local deployment="$1"
-    kubectl get deployment "$deployment" -o yaml
+    kdepl "$deployment" -o yaml
 }
 
 function kapply() { # <FILE NAME>
